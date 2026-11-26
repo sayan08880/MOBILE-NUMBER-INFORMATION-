@@ -1,233 +1,127 @@
-# Mobile Number Tracker & Wi-Fi Scanner (Python Tkinter)
+# Mobile Number Tracker & Wi-Fi Scanner
 
-A **Python GUI application** that can:
+A Python Tkinter GUI application for retrieving mobile number information, scanning nearby Wi-Fi networks, and providing voice feedback.
 
-* Track basic information about an **Indian mobile number**
-* Scan and list **available Wi-Fi networks**
-* Provide **voice feedback using text-to-speech**
-* Maintain **search history**
+## Features
 
-The application is built using **Python Tkinter** with a **dark terminal-style interface**.
-
----
-
-# Features
-
-### Mobile Number Tracking
-
-Fetch information about a mobile number using an API.
-
-Information displayed:
-
-* Mobile Number
-* Local Format
-* International Format
-* Country Prefix
-* Country Code
-* Country Name
-* Location
-* Carrier
-* Line Type
-
----
+### Mobile Number Information
+Uses the Numverify API to retrieve available information about an Indian mobile number, including:
+- Local and international number formats
+- Country prefix and country code
+- Country name and location
+- Carrier and line type
 
 ### Wi-Fi Network Scanner
+- Detects nearby Wi-Fi network names (SSIDs).
+- Displays detected networks in the application.
+- Saves results to `wifi_networks.txt`.
 
-Type **wifi** to scan available Wi-Fi networks.
-
-The program will:
-
-* Detect nearby Wi-Fi SSIDs
-* Display them inside the GUI
-* Save results to a file
-
-Output file:
-
-```
-wifi_networks.txt
-```
-
----
+**Platform limitation:** Wi-Fi scanning currently uses the Windows `netsh` command and is therefore supported on Windows only. It does not work as-is on Fedora or other Linux distributions.
 
 ### Voice Assistant
-
-The application includes **text-to-speech** functionality using **pyttsx3**.
-
-The system speaks:
-
-* Mobile number information
-* Wi-Fi scan results
-* Error messages
-* History information
-
----
+Uses `pyttsx3` for text-to-speech feedback.
 
 ### Search History
+- Displays previously searched mobile numbers using the `history` command.
+- Saves history in `search_history.json`.
 
-Type:
+## Requirements
 
-```
-history
-```
+- Python 3
+- Tkinter
+- Requests
+- pyttsx3
 
-to display previously searched mobile numbers.
+## Installation
 
-Stored information includes:
+Clone the repository:
 
-* Number searched
-* Country name
-* Carrier
-
-History can be saved to:
-
-```
-search_history.json
+```bash
+git clone https://github.com/sayan08880/MOBILE-NUMBER-INFORMATION-.git
+cd MOBILE-NUMBER-INFORMATION-
 ```
 
----
+Install the Python dependencies:
 
-# Commands
-
-| Command       | Function                      |
-| ------------- | ----------------------------- |
-| Mobile number | Track number information      |
-| history       | Show previous searches        |
-| wifi          | Scan available Wi-Fi networks |
-
-Example:
-
-```
-9876543210
+```bash
+python -m pip install requests pyttsx3
 ```
 
-```
-wifi
-```
+On Fedora KDE, install Tkinter if needed:
 
-```
-history
+```bash
+sudo dnf5 install python3-tkinter
 ```
 
----
+## API Key Configuration
 
-# Requirements
+This project uses the [Numverify API](https://numverify.com/).
 
-Python **3.x**
+Set your API key as an environment variable instead of placing it directly in the source code.
 
-Required libraries:
+**Fedora / Linux:**
 
-```
-requests
-pyttsx3
-tkinter
+```bash
+export NUMVERIFY_API_KEY="YOUR_API_KEY"
 ```
 
-Install dependencies:
+**Windows PowerShell:**
 
-```
-pip install requests pyttsx3
-```
-
-(Tkinter usually comes pre-installed with Python.)
-
----
-
-# How to Run
-
-1. Clone the repository
-
-```
-git clone https://github.com/yourusername/mobile-number-tracker.git
+```powershell
+$env:NUMVERIFY_API_KEY = "YOUR_API_KEY"
 ```
 
-2. Open the project folder
+Replace `YOUR_API_KEY` with your own Numverify API key.
 
-```
-cd mobile-number-tracker
-```
+Keep your API key private. Never commit it to GitHub.
 
-3. Run the program
+## Run the Application
 
-```
-python tracker.py
+```bash
+python info.py
 ```
 
----
+## Available Commands
 
-# Project Structure
+| Input | Function |
+|---|---|
+| Mobile number | Retrieve available number information |
+| `history` | Display previous searches |
+| `wifi` | Scan available Wi-Fi networks (Windows only) |
 
-```
-mobile-number-tracker/
-│
-├── tracker.py
-├── wifi_networks.txt
-├── search_history.json
+## Project Structure
+
+```text
+MOBILE-NUMBER-INFORMATION-/
+├── info.py
 └── README.md
 ```
 
----
+The application creates `wifi_networks.txt` and `search_history.json` when those features are used.
 
-# Technologies Used
+## Technologies Used
 
-* Python
-* Tkinter GUI
-* Requests API
-* Pyttsx3 (Text-to-Speech)
-* Subprocess
-* Regex
-* JSON
+- Python
+- Tkinter
+- Requests
+- pyttsx3
+- Subprocess
+- Regular expressions
+- JSON
 
----
+## Educational Purpose
 
-# API Used
+This project demonstrates Python GUI development, API integration, text-to-speech, file handling, and operating-system command execution.
 
-This project uses the **Numverify API** to validate and retrieve mobile number information.
-
-Website:
-
-```
-https://numverify.com
-```
-
-Note:
-You must provide your **API key** in the code.
-
-Example:
-
-```
-api_key = "YOUR_API_KEY"
-```
-
----
-
-# Educational Purpose
-
-This project helps beginners learn:
-
-* Python GUI programming
-* API integration
-* Text-to-Speech systems
-* File handling
-* Wi-Fi scanning using system commands
-
----
-
-# Author
+## Author
 
 **Sayan**
-
 BCA Student
-Python GUI Project
 
----
+## Disclaimer
 
-# Disclaimer
+This project is intended for educational purposes. Mobile number information depends on the Numverify API and its data accuracy.
 
-This tool is created for **educational purposes only**.
-Mobile number data depends on the **API service accuracy**.
+## License
 
----
-
-# License
-
-Free to use for **learning and educational projects**.
+Free to use for learning and educational projects.

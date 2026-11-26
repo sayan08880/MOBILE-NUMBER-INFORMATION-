@@ -141,6 +141,13 @@ def on_enter(event=None):
         messagebox.showinfo("Wi-Fi Scan", "Wi-Fi networks have been displayed.")
     else:
         if phone_number:
+            if not api_key:
+                messagebox.showerror(
+                    "API Key Missing",
+                    "Please set the NUMVERIFY_API_KEY environment variable."
+                )
+                return
+
             track_mobile_number(api_key, phone_number)
         else:
             messagebox.showwarning("Input Error", "Please enter a mobile number, 'history', or 'wifi'")
@@ -161,7 +168,7 @@ def exit_app():
     save_history()  # Save history before exiting
     root.destroy()
 
-api_key = "f98b8d297dfe98415eba65f5ecccb9f2"
+api_key = os.getenv("NUMVERIFY_API_KEY")
 
 root = tk.Tk()
 root.title("Mobile Number Tracker / Wi-Fi Scanner")
